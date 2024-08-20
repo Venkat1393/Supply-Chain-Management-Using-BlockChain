@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Supply Chain Management using Blockchain</h1>
+
+    <div id="createProduct">
+        <h2>Create Product</h2>
+        <input type="text" id="productName" placeholder="Product Name">
+        <input type="text" id="origin" placeholder="Origin">
+        <input type="text" id="destination" placeholder="Destination">
+        <button onclick="createProduct()">Create Product</button>
+    </div>
+
+    <div id="transferProduct">
+        <h2>Transfer Product</h2>
+        <input type="number" id="productId" placeholder="Product ID">
+        <input type="text" id="newDestination" placeholder="New Destination">
+        <button onclick="transferProduct()">Transfer Product</button>
+    </div>
+
+    <div id="getProduct">
+        <h2>Get Product Details</h2>
+        <input type="number" id="getProductId" placeholder="Product ID">
+        <button onclick="getProduct()">Get Product</button>
+        <p id="productDetails"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
