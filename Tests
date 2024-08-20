@@ -1,0 +1,17 @@
+const SupplyChain = artifacts.require("SupplyChain");
+
+contract("SupplyChain", (accounts) => {
+    it("should create a product", async () => {
+        const supplyChainInstance = await SupplyChain.deployed();
+        await supplyChainInstance.createProduct("Product 1", "Origin 1", "Destination 1", { from: accounts[0] });
+        const product = await supplyChainInstance.getProduct(1);
+        assert.equal(product.name, "Product 1", "The product name was not stored correctly.");
+    });
+
+    it("should transfer a product", async () => {
+        const supplyChainInstance = await SupplyChain.deployed();
+        await supplyChainInstance.transferProduct(1, "New Destination", { from: accounts[0] });
+        const product = await supplyChainInstance.getProduct(1);
+        assert.equal(product.destination, "New Destination", "The product destination was not updated correctly.");
+    });
+});
