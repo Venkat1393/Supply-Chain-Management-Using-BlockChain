@@ -1,0 +1,24 @@
+supply-chain-blockchain/
+│
+├── contracts/
+│   └── SupplyChain.sol
+│
+├── migrations/
+│   └── 1_initial_migration.js
+│   └── 2_deploy_contracts.js
+│
+├── src/
+│   ├── index.html
+│   ├── app.js
+│   └── style.css
+│
+├── test/
+│   └── supply_chain_test.js
+│
+├── truffle-config.js
+│
+├── package.json
+│
+├── README.md
+│
+└── LICENSE
