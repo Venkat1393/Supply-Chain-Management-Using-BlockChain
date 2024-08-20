@@ -1,0 +1,35 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SupplyChain {
+    struct Product {
+        uint id;
+        string name;
+        string origin;
+        string destination;
+        uint timestamp;
+        address owner;
+    }
+
+    mapping(uint => Product) public products;
+    uint public productCount = 0;
+
+    event ProductCreated(uint id, string name, string origin, string destination, uint timestamp, address owner);
+
+    function createProduct(string memory name, string memory origin, string memory destination) public {
+        productCount++;
+        products[productCount] = Product(productCount, name, origin, destination, block.timestamp, msg.sender);
+        emit ProductCreated(productCount, name, origin, destination, block.timestamp, msg.sender);
+    }
+
+    function transferProduct(uint id, string memory newDestination) public {
+        require(products[id].owner == msg.sender, "Only owner can transfer the product");
+        products[id].destination = newDestination;
+        products[id].timestamp = block.timestamp;
+    }
+
+    function getProduct(uint id) public view returns (uint, string memory, string memory, string memory, uint, address) {
+        Product memory p = products[id];
+        return (p.id, p.name, p.origin, p.destination, p.timestamp, p.owner);
+    }
+}
