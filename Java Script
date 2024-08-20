@@ -1,0 +1,29 @@
+if (typeof window.ethereum !== 'undefined') {
+    window.web3 = new Web3(window.ethereum);
+    window.ethereum.enable();
+}
+
+const contractABI = [/* ABI goes here */];
+const contractAddress = 'Your_Deployed_Contract_Address';
+const supplyChain = new web3.eth.Contract(contractABI, contractAddress);
+
+async function createProduct() {
+    const accounts = await web3.eth.getAccounts();
+    const name = document.getElementById("productName").value;
+    const origin = document.getElementById("origin").value;
+    const destination = document.getElementById("destination").value;
+    supplyChain.methods.createProduct(name, origin, destination).send({ from: accounts[0] });
+}
+
+async function transferProduct() {
+    const accounts = await web3.eth.getAccounts();
+    const productId = document.getElementById("productId").value;
+    const newDestination = document.getElementById("newDestination").value;
+    supplyChain.methods.transferProduct(productId, newDestination).send({ from: accounts[0] });
+}
+
+async function getProduct() {
+    const productId = document.getElementById("getProductId").value;
+    const product = await supplyChain.methods.getProduct(productId).call();
+    document.getElementById("productDetails").innerHTML = `ID: ${product[0]}<br>Name: ${product[1]}<br>Origin: ${product[2]}<br>Destination: ${product[3]}<br>Timestamp: ${product[4]}<br>Owner: ${product[5]}`;
+}
